@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.requires_arc      = true
     s.static_framework  = true
 
-    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v5.0.0'}
+    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v6.0.0'}
 
     s.default_subspec   = 'video'
 
@@ -41,7 +41,12 @@ Pod::Spec.new do |s|
       'AudioToolbox',
       'CoreMedia',
       'CoreAudio',
-      'CoreAudioTypes'
+      'AVFoundation',
+      'Security',
+      'CoreVideo',
+      'CoreImage',
+      'CoreGraphics',
+      'Foundation'
     ]
 
     s.libraries = [
@@ -51,9 +56,23 @@ Pod::Spec.new do |s|
     ]
 
     s.pod_target_xcconfig = {
-      'FRAMEWORK_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/ios/Frameworks',
+      'FRAMEWORK_SEARCH_PATHS' => [
+        '$(PODS_TARGET_SRCROOT)/ios/Frameworks',
+        '$(PLATFORM_DIR)/Developer/Library/Frameworks'
+      ],
       'OTHER_LDFLAGS' => '-lbz2 -lc++ -lz',
       'CLANG_CXX_LANGUAGE_STANDARD' => 'c++11',
-      'CLANG_CXX_LIBRARY' => 'libc++'
+      'CLANG_CXX_LIBRARY' => 'libc++',
+      'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+      'VALID_ARCHS' => 'arm64 x86_64',
+      'ENABLE_BITCODE' => 'NO'
+    }
+
+    s.user_target_xcconfig = {
+      'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+    }
+
+    s.xcconfig = {
+      'FRAMEWORK_SEARCH_PATHS' => '$(SDKROOT)/System/Library/Frameworks'
     }
 end

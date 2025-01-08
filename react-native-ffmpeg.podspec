@@ -14,60 +14,44 @@ Pod::Spec.new do |s|
 
     s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => "v#{s.version}" }
 
-    s.source_urls = {
-        'mobile-ffmpeg-video' => 'https://your-hosted-location/mobile-ffmpeg-video-4.4-ios-framework.zip',
-        'mobile-ffmpeg-https' => 'https://your-hosted-location/mobile-ffmpeg-https-4.4-ios-framework.zip',
-        # Add other variants as needed
-    }
-
     s.default_subspec   = 'https'
 
     s.dependency        'React'
 
-    s.subspec 'min' do |ss|
-        ss.source_files      = 'ios/RNFFmpegModule.m',
-                               'ios/RNFFmpegModule.h',
-                               'ios/RNExecuteDelegate.h',
-                               'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-min', '4.4'
-        ss.ios.deployment_target = '11.0'
-    end
-
-    s.subspec 'min-lts' do |ss|
-        ss.source_files      = 'ios/RNFFmpegModule.m',
-                               'ios/RNFFmpegModule.h',
-                               'ios/RNExecuteDelegate.h',
-                               'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-min', '4.4.LTS'
-        ss.ios.deployment_target = '9.3'
-    end
-
-    s.subspec 'min-gpl' do |ss|
-        ss.source_files      = 'ios/RNFFmpegModule.m',
-                               'ios/RNFFmpegModule.h',
-                               'ios/RNExecuteDelegate.h',
-                               'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-min-gpl', '4.4'
-        ss.ios.deployment_target = '11.0'
-    end
-
-    s.subspec 'min-gpl-lts' do |ss|
-        ss.source_files      = 'ios/RNFFmpegModule.m',
-                               'ios/RNFFmpegModule.h',
-                               'ios/RNExecuteDelegate.h',
-                               'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-min-gpl', '4.4.LTS'
-        ss.ios.deployment_target = '9.3'
-    end
-
     s.subspec 'https' do |ss|
         ss.source_files      = 'ios/RNFFmpegModule.m',
-                               'ios/RNFFmpegModule.h',
-                               'ios/RNExecuteDelegate.h',
-                               'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-https', '4.4'
-        ss.ios.deployment_target = '11.0'
+                              'ios/RNFFmpegModule.h',
+                              'ios/RNExecuteDelegate.h',
+                              'ios/RNExecuteDelegate.m'
         ss.vendored_frameworks = 'mobile-ffmpeg-frameworks/https/mobile-ffmpeg-https.framework'
+        ss.ios.deployment_target = '11.0'
+        ss.frameworks = 'AudioToolbox', 'CoreMedia', 'VideoToolbox', 'AVFoundation'
+        ss.libraries = 'c++', 'z'
+    end
+
+    s.subspec 'video' do |ss|
+        ss.source_files = 'ios/RNFFmpegModule.m',
+                         'ios/RNFFmpegModule.h',
+                         'ios/RNExecuteDelegate.h',
+                         'ios/RNExecuteDelegate.m'
+
+        # Add all the frameworks from mobile-ffmpeg-video folder
+        ss.vendored_frameworks = [
+            'mobile-ffmpeg-video/expat.framework',
+            'mobile-ffmpeg-video/fontconfig.framework',
+            'mobile-ffmpeg-video/freetype.framework',
+            'mobile-ffmpeg-video/fribidi.framework',
+            'mobile-ffmpeg-video/giflib.framework',
+            'mobile-ffmpeg-video/jpeg.framework',
+            'mobile-ffmpeg-video/kvazaar.framework',
+            'mobile-ffmpeg-video/libaom.framework',
+            'mobile-ffmpeg-video/libass.framework',
+            'mobile-ffmpeg-video/libavcodec.framework',
+            'mobile-ffmpeg-video/libavdevice.framework',
+            'mobile-ffmpeg-video/libavfilter.framework'
+        ]
+
+        ss.ios.deployment_target = '11.0'
         ss.frameworks = 'AudioToolbox', 'CoreMedia', 'VideoToolbox', 'AVFoundation'
         ss.libraries = 'c++', 'z'
     end
@@ -115,17 +99,6 @@ Pod::Spec.new do |s|
                                'ios/RNExecuteDelegate.m'
         ss.dependency 'mobile-ffmpeg-audio', '4.4.LTS'
         ss.ios.deployment_target = '9.3'
-    end
-
-    s.subspec 'video' do |ss|
-        ss.source_files = 'ios/RNFFmpegModule.m',
-                         'ios/RNFFmpegModule.h',
-                         'ios/RNExecuteDelegate.h',
-                         'ios/RNExecuteDelegate.m'
-        ss.vendored_frameworks = 'mobile-ffmpeg-frameworks/video/mobile-ffmpeg-video.framework'
-        ss.ios.deployment_target = '11.0'
-        ss.frameworks = 'AudioToolbox', 'CoreMedia', 'VideoToolbox', 'AVFoundation'
-        ss.libraries = 'c++', 'z'
     end
 
     s.subspec 'video-lts' do |ss|

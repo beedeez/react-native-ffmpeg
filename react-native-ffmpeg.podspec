@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.requires_arc      = true
     s.static_framework  = true
 
-    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v6.0.0'}
+    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v7.0.0'}
 
     s.default_subspec   = 'video'
 

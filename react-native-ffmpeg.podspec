@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.requires_arc      = true
     s.static_framework  = true
 
-    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v4.0.0'}
+    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v5.0.0'}
 
     s.default_subspec   = 'video'
 
@@ -36,7 +36,24 @@ Pod::Spec.new do |s|
 				ss.ios.deployment_target = '9.3'
     end
 
+    s.frameworks = [
+      'VideoToolbox',
+      'AudioToolbox',
+      'CoreMedia',
+      'CoreAudio',
+      'CoreAudioTypes'
+    ]
+
+    s.libraries = [
+      'bz2',
+      'c++',
+      'z'
+    ]
+
     s.pod_target_xcconfig = {
-			'FRAMEWORK_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/ios/Frameworks'
+      'FRAMEWORK_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/ios/Frameworks',
+      'OTHER_LDFLAGS' => '-lbz2 -lc++ -lz',
+      'CLANG_CXX_LANGUAGE_STANDARD' => 'c++11',
+      'CLANG_CXX_LIBRARY' => 'libc++'
     }
 end

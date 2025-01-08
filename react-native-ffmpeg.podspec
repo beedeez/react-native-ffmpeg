@@ -12,7 +12,13 @@ Pod::Spec.new do |s|
     s.requires_arc      = true
     s.static_framework  = true
 
-    s.source            = { :git => 'https://github.com/tanersener/react-native-ffmpeg.git', :tag => 'v0.5.2'}
+    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => "v#{s.version}" }
+
+    s.source_urls = {
+        'mobile-ffmpeg-video' => 'https://your-hosted-location/mobile-ffmpeg-video-4.4-ios-framework.zip',
+        'mobile-ffmpeg-https' => 'https://your-hosted-location/mobile-ffmpeg-https-4.4-ios-framework.zip',
+        # Add other variants as needed
+    }
 
     s.default_subspec   = 'https'
 
@@ -61,6 +67,9 @@ Pod::Spec.new do |s|
                                'ios/RNExecuteDelegate.m'
         ss.dependency 'mobile-ffmpeg-https', '4.4'
         ss.ios.deployment_target = '11.0'
+        ss.vendored_frameworks = 'mobile-ffmpeg-frameworks/https/mobile-ffmpeg-https.framework'
+        ss.frameworks = 'AudioToolbox', 'CoreMedia', 'VideoToolbox', 'AVFoundation'
+        ss.libraries = 'c++', 'z'
     end
 
     s.subspec 'https-lts' do |ss|
@@ -109,12 +118,14 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'video' do |ss|
-        ss.source_files      = 'ios/RNFFmpegModule.m',
-                               'ios/RNFFmpegModule.h',
-                               'ios/RNExecuteDelegate.h',
-                               'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-video', '4.4'
+        ss.source_files = 'ios/RNFFmpegModule.m',
+                         'ios/RNFFmpegModule.h',
+                         'ios/RNExecuteDelegate.h',
+                         'ios/RNExecuteDelegate.m'
+        ss.vendored_frameworks = 'mobile-ffmpeg-frameworks/video/mobile-ffmpeg-video.framework'
         ss.ios.deployment_target = '11.0'
+        ss.frameworks = 'AudioToolbox', 'CoreMedia', 'VideoToolbox', 'AVFoundation'
+        ss.libraries = 'c++', 'z'
     end
 
     s.subspec 'video-lts' do |ss|

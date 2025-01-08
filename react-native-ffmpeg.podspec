@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
     s.requires_arc      = true
     s.static_framework  = true
 
-    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v2.0.0'}
+    s.source            = { :git => 'https://github.com/beedeez/react-native-ffmpeg.git', :tag => 'v4.0.0'}
 
     s.default_subspec   = 'video'
 
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
                          'ios/RNFFmpegModule.h',
                          'ios/RNExecuteDelegate.h',
                          'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-video', '4.4.LTS'
+        ss.vendored_frameworks = 'ios/Frameworks/*.framework'
         ss.ios.deployment_target = '11.0'
     end
 
@@ -32,12 +32,11 @@ Pod::Spec.new do |s|
                                'ios/RNFFmpegModule.h',
                                'ios/RNExecuteDelegate.h',
                                'ios/RNExecuteDelegate.m'
-        ss.dependency 'mobile-ffmpeg-video', '4.4.LTS'
-        ss.ios.deployment_target = '9.3'
+				ss.vendored_frameworks = 'ios/Frameworks/*.framework'
+				ss.ios.deployment_target = '9.3'
     end
 
     s.pod_target_xcconfig = {
-        'FRAMEWORK_SEARCH_PATHS' => '$(PODS_ROOT)/../node_modules/react-native-ffmpeg/frameworks'
+			'FRAMEWORK_SEARCH_PATHS' => '$(PODS_TARGET_SRCROOT)/ios/Frameworks'
     }
-
 end

@@ -44,11 +44,11 @@ repositories {
     jcenter()
     maven { url 'https://maven.google.com' }
     flatDir {
-        dirs "${project.projectDir}/libs"
+        dirs 'libs'
     }
 }
 
 dependencies {
-    implementation(name: 'mobile-ffmpeg-video-4.4.LTS', ext: 'aar')
+    implementation files('libs/mobile-ffmpeg-video-4.4.LTS.aar')
     implementation 'com.facebook.react:react-native:+'
 }

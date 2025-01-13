@@ -1,15 +1,3 @@
-static String safePackageName(String prop) {
-    prop.replace("-lts", "")
-}
-
-static String safePackageVersion(String prop, String version, String ltsVersion) {
-    prop.contains("-lts") ? ltsVersion + ".LTS" : version
-}
-
-String safeExtGet(String prop, String fallback) {
-    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
-}
-
 apply plugin: 'com.android.library'
 
 buildscript {
@@ -43,9 +31,12 @@ repositories {
     mavenCentral()
     jcenter()
     maven { url 'https://maven.google.com' }
+		flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
-    implementation 'com.arthenica:mobile-ffmpeg-' + safePackageName(safeExtGet('reactNativeFFmpegPackage', 'https')) + ':' + safePackageVersion(safeExtGet('reactNativeFFmpegPackage', 'https'), safeExtGet('mobileFFmpegVersion', '4.4'), safeExtGet('mobileFFmpegVersion', '4.4'))
+    implementation(name: 'mobile-ffmpeg-video-4.4.LTS', ext: 'aar')
     implementation 'com.facebook.react:react-native:+'
 }

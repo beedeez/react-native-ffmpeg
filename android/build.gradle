@@ -43,8 +43,8 @@ repositories {
     mavenCentral()
     jcenter()
     maven { url 'https://maven.google.com' }
-		flatDir {
-        dirs 'libs'
+    flatDir {
+        dirs "${project.projectDir}/libs"
     }
 }
 

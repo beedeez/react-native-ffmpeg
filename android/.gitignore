@@ -3,3 +3,4 @@
 /.idea/
 /android.iml
 /local.properties
+!/libs/*.aar

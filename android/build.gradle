@@ -49,7 +49,6 @@ repositories {
 }
 
 dependencies {
-		api fileTree(include: ['*.aar'], dir: 'libs')
-    implementation files('libs/mobile-ffmpeg-video-4.4.LTS.aar')
+    implementation files('libs/classes.jar')
     implementation 'com.facebook.react:react-native:+'
 }

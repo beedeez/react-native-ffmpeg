@@ -26,6 +26,10 @@
     "type": "git",
     "url": "git+https://github.com/tanersener/react-native-ffmpeg.git"
   },
+  "dependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"

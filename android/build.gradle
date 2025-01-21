@@ -42,5 +42,5 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.github.Fausto95:mobile-ffmpeg:1.0.1'
+    implementation 'com.github.Fausto95:mobile-ffmpeg:1.0.0'
 }

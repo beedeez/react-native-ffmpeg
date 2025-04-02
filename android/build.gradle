@@ -24,11 +24,11 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 34
 
     defaultConfig {
         minSdkVersion safeExtGet('reactNativeFFmpegPackage', 'https').contains("-lts") ? 16 : 24
-        targetSdkVersion 29
+        targetSdkVersion 34
         versionCode 52
         versionName "0.5.2"
         project.archivesBaseName = "react-native-ffmpeg"
